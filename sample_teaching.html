@@ -1,0 +1,183 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comprehensive HTML Teaching Example</title>
+</head>
+<body>
+    <!-- Headings -->
+    <h1>Complete HTML Elements Demo</h1>
+    <h2>Introduction to HTML</h2>
+    <h3>Core Concepts</h3>
+    <h4>Details</h4>
+    <h5>Subdetails</h5>
+    <h6>Minor Notes</h6>
+
+    <!-- Paragraphs and Links -->
+    <p>This page demonstrates all HTML elements for teaching purposes. Learn more at <a href="https://www.w3.org" title="Visit W3C" target="_blank" rel="noopener">W3C</a>.</p>
+    <p>Links connect the web. Explore <a href="https://developer.mozilla.org" title="MDN Web Docs" target="_blank" rel="noopener">MDN</a> for detailed documentation.</p>
+
+    <!-- Unordered List with Attributes -->
+    <h2>Development Tools (Unordered List)</h2>
+    <ul type="circle">
+        <li>Text Editor (e.g., VS Code)</li>
+        <li>Browser (e.g., Chrome)</li>
+        <li>Developer Tools (F12)</li>
+        <li>Version Control (e.g., Git)</li>
+    </ul>
+
+    <!-- Ordered List with Attributes -->
+    <h2>Steps to Build a Webpage (Ordered List)</h2>
+    <ol type="1" start="1" reversed>
+        <li>Plan the structure</li>
+        <li>Write HTML code</li>
+        <li>Save with .html extension</li>
+        <li>Test in a browser</li>
+    </ol>
+
+    <!-- Table with All Attributes -->
+    <h2>Class Schedule</h2>
+    <table border="1" width="100%" cellpadding="10" cellspacing="0" bgcolor="#f0f0f0" align="center" summary="Weekly class schedule with details">
+        <caption>Class Schedule for Web Development</caption>
+        <thead>
+            <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Topic</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Room</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr align="center" bgcolor="#e0e0e0">
+                <td>Monday</td>
+                <td>HTML Semantics</td>
+                <td>2 hours</td>
+                <td>Room A</td>
+            </tr>
+            <tr align="center">
+                <td>Wednesday</td>
+                <td>Forms and Tables</td>
+                <td>3 hours</td>
+                <td>Room B</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" align="center">Schedule subject to change.</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <!-- Form with All Field Types -->
+    <h2>Registration Form</h2>
+    <form action="/submit" method="post" name="registration" autocomplete="on">
+        <fieldset>
+            <legend>Personal Information</legend>
+            <label for="name">Full Name:</label><br>
+            <input type="text" id="name" name="name" placeholder="John Doe" required><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" placeholder="email@example.com"><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br>
+
+            <label for="phone">Phone:</label><br>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}"><br>
+
+            <label for="birthday">Birthday:</label><br>
+            <input type="date" id="birthday" name="birthday"><br>
+
+            <label for="age">Age:</label><br>
+            <input type="number" id="age" name="age" min="18" max="100"><br>
+
+            <label for="color">Favorite Color:</label><br>
+            <input type="color" id="color" name="color"><br>
+
+            <label for="start-time">Start Time:</label><br>
+            <input type="time" id="start-time" name="start-time"><br>
+
+            <label for="website">Website:</label><br>
+            <input type="url" id="website" name="website" placeholder="https://example.com"><br>
+
+            <label for="volume">Volume Preference:</label><br>
+            <input type="range" id="volume" name="volume" min="0" max="100" value="50"><br>
+
+            <label for="file">Upload Resume:</label><br>
+            <input type="file" id="file" name="file" accept=".pdf"><br>
+
+            <label>Gender:</label><br>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label><br>
+
+            <label>Interests:</label><br>
+            <input type="checkbox" id="coding" name="interests" value="coding">
+            <label for="coding">Coding</label>
+            <input type="checkbox" id="design" name="interests" value="design">
+            <label for="design">Design</label><br>
+
+            <label for="country">Country:</label><br>
+            <select id="country" name="country" multiple size="3">
+                <option value="usa">USA</option>
+                <option value="uk">UK</option>
+                <option value="canada">Canada</option>
+            </select><br>
+
+            <label for="comments">Comments:</label><br>
+            <textarea id="comments" name="comments" rows="4" cols="50" placeholder="Your feedback..."></textarea><br>
+
+            <input type="hidden" name="user_id" value="12345">
+
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </fieldset>
+    </form>
+
+    <!-- Image with Attributes -->
+    <h2>Sample Image</h2>
+    <img src="https://via.placeholder.com/200" alt="Placeholder Image" width="200" height="200" loading="lazy">
+</body>
+</html>
