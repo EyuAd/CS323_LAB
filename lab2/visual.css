@@ -1,0 +1,59 @@
+
+* {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f9f9f9;
+    margin: 0;
+}
+
+
+.banner {
+    background-image: url('https://via.placeholder.com/800x200');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 40px;
+    color: rgb(161, 136, 136);
+}
+
+
+.banner h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.banner h1 i {
+    color: #ff4d4d; /
+    margin-right: 10px;
+}
+
+
+.banner-text {
+    opacity: 0.8; 
+    font-size: 1.2rem;
+}
+
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+.gallery img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 3px solid #605151;
+    border-radius: 8px;
+}
+
+
+.dimmed {
+    opacity: 0.5;
+}

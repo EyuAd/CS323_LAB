@@ -1,0 +1,57 @@
+
+* {
+    font-family: Arial, sans-serif;
+    
+}
+
+body {
+    margin: 20px;
+}
+
+
+.main > h2 {
+    color: #2c3e50;
+    position: relative;
+}
+
+
+.main > h2::before {
+    content: "✔️";
+    color: #e67e22; 
+    font-size: 1.2em;
+}
+
+.main > h2 + p {
+    font-style: italic;
+}
+
+
+.lead ~ p {
+    margin-top: 20px;
+}
+
+
+.main div span:first-child {
+    font-weight: bold;
+}
+
+
+.main div span:nth-child(even) {
+    color: #e74c3c;
+}
+
+
+input[type="text"] {
+    border: 2px solid #ccc;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+
+input[type="password"]:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/*  Using combinators helps target elements without extra classes. */
+/*  Pseudo-classes like :nth-child and pseudo-elements like ::before  */

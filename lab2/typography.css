@@ -1,0 +1,38 @@
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: lightblue;
+}
+h1{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    text-transform: capitalize;
+    color: rgb(36, 36, 84);
+}
+.description{
+    text-align: justify;
+    text-decoration: underline;
+    line-height: 1.5;
+    color: darkblue;
+
+}
+.action-link{
+color: blue;
+
+}
+a:hover{
+    background-color: rgb(128, 0, 0);
+}
+a:active{
+    background-color: chartreuse;
+}
+.skills{
+    list-style: circle;
+    margin: 10px;
+    padding: 10px;
+}
+.skills > li{
+    font-size: x-large;
+    color: darkorange;
+}
